@@ -18,5 +18,4 @@ public class UserDetailController {
 	public PartsUserDetails getPartsUserDetail(@PathVariable String username) {
 		return partsUserDetailService.fetchUserDetail(username);
 	}
-
 }

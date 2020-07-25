@@ -14,7 +14,7 @@ public class PartsUserDetailService {
 	UserRepository userRepository;
 	
 	public PartsUserDetails fetchUserDetail(String username) {
-		User user = userRepository.getUserByUserName(username);
+		User user = userRepository.getUserByUserName(username).get();
 		PartsUserDetails partsUserDetails = new PartsUserDetails();
 		partsUserDetails.setUserName(user.getUserName());
 		partsUserDetails.setUserArea(user.getUserArea());

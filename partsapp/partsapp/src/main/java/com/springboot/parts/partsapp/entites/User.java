@@ -1,5 +1,6 @@
 package com.springboot.parts.partsapp.entites;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -21,6 +22,8 @@ public class User {
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	Set<Role> roles;
+	@OneToMany(fetch = FetchType.LAZY)
+	List<AccySales> accysales;
 
 	public int getId() {
 		return id;
@@ -60,5 +63,13 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public List<AccySales> getAccysales() {
+		return accysales;
+	}
+
+	public void setAccysales(List<AccySales> accysales) {
+		this.accysales = accysales;
 	}
 }
