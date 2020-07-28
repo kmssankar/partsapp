@@ -23,24 +23,26 @@ public class UserRegisterService {
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	public boolean registerUsertoDB(RegisterUser regUser) {
-		if(!checkUserExistence(regUser.getUserName())){
+	public String registerUsertoDB(RegisterUser regUser) {
+		if(checkUserExistence(regUser.getUserName())){
 		User user = new User();
 		user.setUserName(regUser.getUserName());
 		user.setUserArea(regUser.getRegion());
 		user.setPassword(bCryptPasswordEncoder.encode(regUser.getPassword()));
-		Role role = roleRepository.getRolebyName("ROLE_USER").get();
+		Role role = new Role();
+		role.setId(2);
+		role.setName("ROLE_USER");
 		Set<Role> roleset = new HashSet<>();
 		roleset.add(role);
 		user.setRoles(roleset);
 		userRepository.save(user);
-		return true;
+		return "Successfully registered";
 		}else {
-			return false;
+			return "User Id already Exists !";
 		}
 	}
 	
-	private boolean checkUserExistence (String userName) {
+	public boolean checkUserExistence (String userName) {
 		User validateUser = userRepository.getUserByUserName(userName).orElse(null);
 		return (validateUser==null);
 	}

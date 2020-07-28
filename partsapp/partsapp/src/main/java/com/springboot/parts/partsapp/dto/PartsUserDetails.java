@@ -4,7 +4,7 @@ public class PartsUserDetails {
 	
 	String userName;
 	String userArea;
-	String Authority;
+	String authority;
 	public String getUserName() {
 		return userName;
 	}
@@ -18,9 +18,9 @@ public class PartsUserDetails {
 		this.userArea = userArea;
 	}
 	public String getAuthority() {
-		return Authority;
+		return authority;
 	}
 	public void setAuthority(String authority) {
-		Authority = authority;
+		this.authority = authority;
 	}
 }

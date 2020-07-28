@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.parts.partsapp.dto.AccyCodeDesc;
+import com.springboot.parts.partsapp.dto.AccysalesRep;
+import com.springboot.parts.partsapp.service.SalesReportService;
 import com.springboot.parts.partsapp.service.SearchService;
 
 //@CrossOrigin("Http://localhost:4200")
@@ -17,6 +19,8 @@ import com.springboot.parts.partsapp.service.SearchService;
 public class SearchController {
     @Autowired
     SearchService searchservice;
+    @Autowired 
+    SalesReportService salesReportService;
     
 	@GetMapping("/series")
 	public List<String> getSearchSeries(){
@@ -36,4 +40,10 @@ public class SearchController {
 	public List<AccyCodeDesc> getaccycdsPerSeriesModelYrModelcd(@PathVariable String series,@PathVariable String modelYr,@PathVariable String model){
 		return searchservice.fetchallAccybySeriesModelYrModel(series, modelYr,model);
 	}
+	
+	@GetMapping("/accysalesrep/{series}/{modelyr}/{model}/{accyLis}")
+		public List<AccysalesRep> getSalesreport(@PathVariable String series,@PathVariable String modelyr, 
+				@PathVariable String model,@PathVariable String[] accyLis){	
+		return 	salesReportService.getSalesReportforAccy(series, modelyr, model, accyLis);
+		}
 }
