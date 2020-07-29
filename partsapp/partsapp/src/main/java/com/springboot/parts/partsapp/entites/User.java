@@ -1,6 +1,5 @@
 package com.springboot.parts.partsapp.entites;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -8,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
@@ -19,8 +19,8 @@ public class User {
 	String userName;
 	String Password;
 	String userArea;
-	
-	@OneToMany(fetch = FetchType.EAGER)
+	String email;
+	@ManyToMany(fetch = FetchType.EAGER)
 	Set<Role> roles;
 
 	public int getId() {
@@ -62,4 +62,13 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 }

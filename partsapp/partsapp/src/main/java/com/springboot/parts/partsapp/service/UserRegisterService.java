@@ -28,10 +28,9 @@ public class UserRegisterService {
 		User user = new User();
 		user.setUserName(regUser.getUserName());
 		user.setUserArea(regUser.getRegion());
+		user.setEmail(regUser.getEmail());
 		user.setPassword(bCryptPasswordEncoder.encode(regUser.getPassword()));
-		Role role = new Role();
-		role.setId(2);
-		role.setName("ROLE_USER");
+		Role role = roleRepository.getRolebyName("ROLE_USER").get();
 		Set<Role> roleset = new HashSet<>();
 		roleset.add(role);
 		user.setRoles(roleset);
