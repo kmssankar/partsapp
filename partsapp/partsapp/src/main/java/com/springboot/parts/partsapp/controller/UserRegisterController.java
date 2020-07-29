@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.parts.partsapp.dto.RegisterMsg;
 import com.springboot.parts.partsapp.dto.RegisterUser;
 import com.springboot.parts.partsapp.service.UserRegisterService;
 
@@ -18,13 +19,16 @@ public class UserRegisterController {
 	UserRegisterService userRegisterService;
 
 	@PostMapping("/api/register")
-	public ResponseEntity<?> registerUser(@RequestBody RegisterUser registerUser) {
+	public ResponseEntity<RegisterMsg> registerUser(@RequestBody RegisterUser registerUser) {
 		System.out.println(registerUser.getUserName()+ " -- " + registerUser.getPassword());
+		RegisterMsg reg =  new RegisterMsg();
 		if(userRegisterService.checkUserExistence(registerUser.getUserName())) {
 			userRegisterService.registerUsertoDB(registerUser);
-			return ResponseEntity.status(HttpStatus.OK).body("Successfully registerd");
+			reg.setMessage("Successfully Registerd");				
+				return 	ResponseEntity.status(HttpStatus.OK).body(reg);
 		}else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User Name Already exists!");
+			reg.setMessage("Reg Failed ");	
+			return ResponseEntity.status(HttpStatus.OK).body(reg);
 		}
 	}
 }
