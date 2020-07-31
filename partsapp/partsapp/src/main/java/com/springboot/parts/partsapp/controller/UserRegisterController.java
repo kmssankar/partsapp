@@ -28,7 +28,7 @@ public class UserRegisterController {
 				return 	ResponseEntity.status(HttpStatus.OK).body(reg);
 		}else {
 			reg.setMessage("Reg Failed ");	
-			return ResponseEntity.status(HttpStatus.OK).body(reg);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(reg);
 		}
 	}
 }
